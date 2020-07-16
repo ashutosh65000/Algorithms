@@ -1,0 +1,12 @@
+Longest Palindromic Substring with Manacher's Algorithm
+
+Prerequisite - I hope that you have understood question very well
+
+Application - To solve Longest Palindromic substring question
+
+Let's first go for Naive Approach AKA Brute Force
+This approach is never preffered because it takes O(n^3) time
+Reason - Firstly we make every possible substring of given string which takes O(n^2) time
+then check every substring if it is palindrome or not takes O(n) time
+then maintain maximum value for longest palindromic substring 
+Overall -  O(n^2)*O(n) = O(n^3)

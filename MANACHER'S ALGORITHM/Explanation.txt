@@ -1,0 +1,46 @@
+   
+Manacher's Algorithm
+
+Prerequisite- Dynamic Approach
+
+Now One might wonder what is use of C varaible 
+It is the centre of the substring which has highest R(rightmost) value
+One might get confused that C is centre of longest palindromic substring 
+because sometimes it fits perfectly, But consider this case 
+  s="abbacdc"
+  Here LPS will be 4 but C will be 5 because its R is 6 because of cdc substring
+  
+So with above explanation we complete below part
+ if (i + rad - 1 > R) {
+        C = i; 
+        R = i + rad - 1; 
+    }
+here we keep i as the root and expand as far as possible
+then we compare rightmost boundary keeping i as centre 
+with R which is rightmost boundary of substring with C as centre 
+then we update C and R value
+
+Here we maintain P array to store LPS length of every index
+
+Now comes this part
+if (i <= R) {
+        rad = Math.min(P[2*C-i], R-i); 
+    } else {
+        rad = 0; 
+    }
+	
+	Now main deal here is to initialise rad varaible
+	if i<=R means that i is substring of string with centre as C whose LPS is calculated
+	So here we check for mirror indexed value 
+	Note here that is said mirror indexed value not mirror indexed character 
+	So if we have string of length 9 mirror value of 5 will be 3
+	So whatever is the LPS value of 2*C-i will be the value of i if
+	it doesn't exceed R that is R-i is for
+	the LPS value of i can exceed 2*C-i but it is for sure that it will not be less than that
+	
+	and we also need to store LPS value in P array
+	P[i]=i+rad-1;
+	
+Conclusion - We can calculate i LPS value by its mirror value to get a head start
+			 rest is same as DP approach
+  

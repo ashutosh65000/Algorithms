@@ -1,0 +1,37 @@
+Dynamic Approach
+Now understand this carefully as this is very root of Manacher Algorithm
+Here when we tarverse through string we make every character as the centre of the 
+palindromic substring we  are about to calculate
+We keep that root fixed and start expanding to left and right side simultaneously
+until left or right boundary exceeds the length of string or they stop matching
+Here's the code to make it clear
+
+for (int i = 0; i < T.length(); ++i){
+int rad=0;
+while (i+rad < T.length() && i-rad >= 0 && T.charAt(i-rad) == T.charAt(i+rad)) {
+        rad++; 
+    }
+	System.out.println(rad);
+	}
+So everytime the while loop ends we get length of palindromic substring keeping ith character as centre of that string
+
+So if you have figured by now this method will only work for odd length strings
+take a example of even length string 
+   s="abba"
+   here we have two centres 1 index and 2 index
+   and the output that above code will give will be 1
+   So to avoid this we convert above string as "#a#b#b#a#"
+   this is what improvedString() does and we do this for every string even or odd
+   
+   Other than this we just have to maintain a maximum varaible
+   int max=0;
+   for (int i = 0; i < T.length(); ++i){
+int rad=0;
+while (i+rad < T.length() && i-rad >= 0 && T.charAt(i-rad) == T.charAt(i+rad)) {
+        rad++; 
+    }
+   if(max<rad-1){
+	max=rad-1;
+	maxLPSCenterPosition = i;   //to get centre of LPS
+  }
+	}
