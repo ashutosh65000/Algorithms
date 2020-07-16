@@ -1,8 +1,5 @@
 import java.util.*;
 
-/*
-Agar isse clear na ho to hackerrank vale solution ka dry run kara ke dekhna
-*/
 public class Manacher{
 		public static void main(String[] args) {
 			
@@ -12,12 +9,6 @@ public class Manacher{
 	    String T=improvedString(s1);
 	    int P[]=new int[T.length()];
 	    int C = 0, R = -1, rad;  
-		/*
-		C stands for center of string 
-		maxLPSCenterPosition   means that it is the centre of maximum substring
-		R  means Rightmost boundary
-		rad  means radius of string at i position (matlab ki i ko centre maan ke kitna us substring ko expand kiya ja sakta hai)
-		*/
 		
 	
 	for (int i = 0; i < T.length(); ++i) {
@@ -29,23 +20,12 @@ public class Manacher{
 		System.out.println(0);
         rad = 0; 
     }
-	/*
-	Above se zada samaj me nhi aaya hai
-	but itna samje hai ki
-	isse ye pata chalta hai ki 
-	At i position kitne radius se expand karna shuru karna hai
-	because usse pehle ka already symmetric(palindrome) hai
-	*/
+	
 	
     // Try to extend
     while (i+rad < T.length() && i-rad >= 0 && T.charAt(i-rad) == T.charAt(i+rad)) {
         rad++; 
     }
-	/*
-	Above se ye pata chal raha hai ki
-	i position pe kitne radius tak string symmetric(palindrome) hai
-	in short palindromic substring ka pata chal raha hai
-	*/
 	
 	
     P[i] = rad-1; // storing radius of substring at i 
@@ -55,23 +35,13 @@ public class Manacher{
                 max = P[i]; 
                 maxLPSCenterPosition = i; 
             } 
-    /*
-	isse P array ka maximum pta chal raha hai
-	maxLPSCenterPosition  isse maximum length ki substring ka centre pata chal raha hai
-	*/        
-			
-	
-			
+   
 			
     if (i + rad - 1 > R) {
         C = i; 
         R = i + rad - 1; 
     }
     }
-    /*
-	Agar kisi substring ka radius R exceed kar raha hai to R aur C ko update karna hai
-	*/
-	
 	
 	
     System.out.println(Arrays.toString(P));
