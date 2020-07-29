@@ -1,0 +1,50 @@
+
+Knuth Morris pratt's Algorithm
+
+Prerequiste - Naive Algorithm 
+
+Application - To find multiple or single appearences of a pattern in text string
+
+Time Complexity - O(N+M) N-> length of text M-> length of pattern
+
+Explanation - First we calculate lps array which indicates longest proper 
+			  prefix which is also suffix
+			  we calculate lps array as it tells us how many characters to skip while matching
+			  
+			  First we take j varaible which will act as index pointer for lps array
+			  So we start traversing through string and check if 
+			  text.charAt(i)==pattern.charAt(j)
+			  if it is true then we increment i and j
+			  else
+			  Now comes the time to decrement j
+			  if j is already 0 then we increment i
+			  otherwise
+			  Here lps array comes into play as it tells the next value of j
+			  j=lps[j-1];
+			  
+			  
+			  Now you can see if(j==pattern.length())
+			  at the starting of for loop this condition is to check if pattern is found
+			  if that pattern is founr then we add i-j as to get the starting position
+			  of pattern in text and update j value so it doesn't go out of bounds
+			  
+			  
+			  Now there is a if condition outside for loop you might wonder
+			  what is it doing there to understand this we must take example
+			  text="mississippi" pattern="pi"
+			  So when i=8 and j=0
+			  it matches so 
+			  i=9,j=1;
+			  So when i=9 and j=1
+			  it doesn't match so we update j value
+			  i=9, j=0;
+			  So when i=9 and j=0
+			  it matches so 
+			  i=10,j=1
+			  So when i=10 and j=1
+			  it matches and 
+			  i=11 and j=2
+			  but at this time i=11 for loop condition fails and it goes out of loop
+			  So now if condition doesn't get checked 
+			  that is why we need that if condition outside for loop
+			  
