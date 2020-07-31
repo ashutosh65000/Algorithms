@@ -1,0 +1,119 @@
+	
+	#Kahn's Algorithm
+	
+	###Prerequisite - Topological sort,BFS
+	
+	**Application - Topological sort**
+	
+	Input - number of courses, 2D array which shows edges connecting vertices
+	
+	Explanation - By the name of this algorithm one might think it is something
+				  very tough but let me assure you that it is just topological 
+				  sort with BFS
+				  Usually you must have done topological sort with dfs 
+				  But if you try it with BFS it is also known as Khan's algorithm
+				  
+				  indegree array - this tells about how many incoming edges are on 
+								   that vertex
+				
+				```
+				 ArrayList<Integer> graph[]=new ArrayList[numCourses];
+				int indegree[]=new int[numCourses];
+				for(int i=0;i<prerequisites.length;i++){
+                if(graph[prerequisites[i][0]]==null)
+                    graph[prerequisites[i][0]]=new ArrayList();
+                graph[prerequisites[i][0]].add(prerequisites[i][1]);
+				indegree[prerequisites[i][1]]++;
+				}
+				```
+				  
+				  
+				  above code is to create a graph and update indegree array
+				  So now after creating graph and updating indegree array
+				  We check for for verices in indegree array whose value 
+				  is 0
+				  beacause it has no incoming edge so it can be taken as start
+				  beacause it requires no prior vertex to reach this vertex
+				  So all vertex with value 0 are added to Queue
+				  Below code does the same
+				  ```
+				  Queue<Integer> queue=new LinkedList<>();
+				  for(int index=0;index<numCourses;index++){
+						if(indegree[index]==0)
+						queue.offer(index);
+					}
+					```
+				  
+				  
+				  ```
+				  int count=0;
+					int result[]=new int[numCourses];
+					Stack<Integer> st=new Stack<>();
+					while(!queue.isEmpty()){
+						int temp=queue.poll();
+						//result[count++]=temp;
+						st.push(temp);
+						count++;
+						if(graph[temp]!=null){
+						for(int k:graph[temp]){
+						indegree[k]--;
+						if(indegree[k]==0)
+							queue.offer(k);
+					}
+				}
+			}
+			```
+			
+			
+			So now the above code here simply use BFS 
+			So after poll() method we push that value in stack increment count
+			and 
+			**decrement in indegree array**
+			why - because every outgoing edge from a vertex is a incoming edge of 
+				  some vertex 
+				  so the vertex we get from queue, its neighbors incoming edge also
+				  decreases because we are about to remove that from graph 
+				  so all outgoing edges will also be removed
+				  
+				  
+			**Use of count variable **
+			It is used to check if there is a cycle in graph 
+			because if there is a cycle then topological sort is not possible
+			
+			example [[0,1],[1,2],[2,3],[3,1]];
+			
+			graph representation   [0] ----  [1] ----- [2]
+												\		|
+												  \ 	|
+												    \	|
+												      \ |
+														[3]
+														
+														
+						indegree[0,2,1,1];
+						
+						queue =[0];
+						from 0 we reduce indegree[1] to 1
+						so new indegree[0,1,1,1]
+						
+						So now queue is empty
+						we come out of while loop with count value as 1
+						then this comes into play
+						
+					int index=0;
+					if(count==numCourses)
+						{
+					while(!st.isEmpty()){
+						result[index++]=st.pop();
+					}
+						return result;
+					}
+					else
+						return new int[0];
+						
+						
+						So with this example i think you have understood value of
+						count variable
+						Hence code is completed
+
+	
