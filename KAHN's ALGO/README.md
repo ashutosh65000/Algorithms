@@ -81,7 +81,7 @@
 			because if there is a cycle then topological sort is not possible
 			
 			example [[0,1],[1,2],[2,3],[3,1]];
-			
+			```
 			graph representation   [0] ----  [1] ----- [2]
 												\		|
 												  \ 	|
@@ -89,7 +89,7 @@
 												      \ |
 														[3]
 														
-														
+				```										
 						indegree[0,2,1,1];
 						
 						queue =[0];
@@ -99,7 +99,7 @@
 						So now queue is empty
 						we come out of while loop with count value as 1
 						then this comes into play
-						
+					```	
 					int index=0;
 					if(count==numCourses)
 						{
@@ -110,7 +110,7 @@
 					}
 					else
 						return new int[0];
-						
+					```	
 						
 						So with this example i think you have understood value of
 						count variable
