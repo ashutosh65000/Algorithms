@@ -1,7 +1,7 @@
 	
-	#Kahn's Algorithm
+	# Kahn's Algorithm
 	
-	###Prerequisite - Topological sort,BFS
+	### Prerequisite - Topological sort,BFS
 	
 	**Application - Topological sort**
 	
